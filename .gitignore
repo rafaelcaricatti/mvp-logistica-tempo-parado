@@ -1,0 +1,22 @@
+# Ambiente
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Segredos — nunca versionar credenciais do Firebase
+.env
+firebase-credentials.json
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+.streamlit/secrets.toml
+
+# Sistema
+.DS_Store
+
+# Emulador Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+firestore-data/

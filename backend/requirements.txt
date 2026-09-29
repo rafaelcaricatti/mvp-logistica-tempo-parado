@@ -1,0 +1,7 @@
+# Dependências só do back-end — usado pelo Render (Root Directory = backend)
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic[email]>=2.8
+pydantic-settings>=2.4
+firebase-admin>=6.5
+python-dotenv>=1.0

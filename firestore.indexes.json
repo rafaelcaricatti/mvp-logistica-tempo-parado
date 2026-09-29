@@ -1,0 +1,30 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "roteiros",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "motorista_id", "order": "ASCENDING" },
+        { "fieldPath": "data", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "auditoria",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "entidade", "order": "ASCENDING" },
+        { "fieldPath": "ocorrido_em", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "auditoria",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "entidade", "order": "ASCENDING" },
+        { "fieldPath": "entidade_id", "order": "ASCENDING" },
+        { "fieldPath": "ocorrido_em", "order": "DESCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// O back-end acessa o Firestore pelo Admin SDK, que ignora estas regras.
+// Elas existem para bloquear qualquer acesso direto de clientes ao banco:
+// todo tráfego deve passar pela API, que aplica o controle por perfil (RNF04).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

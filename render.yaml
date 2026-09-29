@@ -1,0 +1,27 @@
+# Blueprint do Render para o back-end do ParouAí.
+# Em render.com: New + → Blueprint → aponte para este repositório/branch.
+# Os campos marcados com "sync: false" são preenchidos manualmente no
+# dashboard do Render (nunca ficam neste arquivo, que vai para o Git).
+services:
+  - type: web
+    name: parouai-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: FIREBASE_PROJECT_ID
+        value: parouai-mvp
+      - key: FIREBASE_CREDENTIALS_JSON
+        sync: false  # cole aqui o conteúdo inteiro de firebase-credentials.json
+      - key: SECRET_KEY
+        generateValue: true  # o Render gera um valor aleatório sozinho
+      - key: ADMIN_EMAIL
+        value: admin@parouai.com
+      - key: ADMIN_SENHA
+        sync: false  # defina a senha do administrador de produção
+      - key: CORS_ORIGINS
+        value: "*"
