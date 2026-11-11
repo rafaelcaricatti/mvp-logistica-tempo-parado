@@ -1,0 +1,13 @@
+{
+  "name": "parouai-aceitacao",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Testes de aceitação (Playwright) do ParouAí — MVP de Monitoramento de Tempo Parado",
+  "scripts": {
+    "postinstall": "node scripts/preparar.js",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0"
+  }
+}

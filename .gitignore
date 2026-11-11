@@ -20,3 +20,7 @@ serviceAccountKey.json
 firebase-debug.log
 firestore-debug.log
 firestore-data/
+
+# Testes de aceitação (Playwright)
+node_modules/
+test-results/
