@@ -42,10 +42,24 @@ async function cadastrarMotorista(page, nome) {
   await expect(page.getByText('Motorista cadastrado.')).toBeVisible()
 }
 
-// Escolhe uma opção em uma caixa de seleção do Streamlit (abre a lista e clica).
+// Escolhe uma opção em uma caixa de seleção do Streamlit: abre a lista, digita
+// para filtrar e clica. Digitar é necessário porque o Streamlit só desenha umas
+// 10 opções por vez — com mais motoristas na base, a opção nem estaria na página.
 async function escolher(page, rotulo, opcao) {
-  await page.getByRole('combobox', { name: rotulo }).click()
+  const caixa = page.getByRole('combobox', { name: rotulo })
+  await caixa.click()
+  await caixa.fill(opcao)
   await page.getByRole('option', { name: opcao }).click()
 }
 
-module.exports = { nomeUnico, entrarComoAdmin, irPara, cadastrarMotorista, escolher }
+// Monta, pela aba Roteiros, um roteiro com os endereços dados (um por linha).
+async function montarRoteiro(page, motorista, enderecos) {
+  const roteiros = page.getByRole('tabpanel', { name: 'Roteiros (RF04)' })
+  await page.getByRole('tab', { name: 'Roteiros (RF04)' }).click()
+  await escolher(page, 'Motorista responsável', motorista)
+  await roteiros.getByLabel('Endereços avulsos').fill(enderecos.join('\n'))
+  await roteiros.getByRole('button', { name: 'Gerar roteiro' }).click()
+  await expect(page.getByText(`Roteiro criado com ${enderecos.length} pontos`)).toBeVisible()
+}
+
+module.exports = { nomeUnico, entrarComoAdmin, irPara, cadastrarMotorista, escolher, montarRoteiro }

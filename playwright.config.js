@@ -12,6 +12,12 @@ const PYTHON = process.platform === 'win32' ? '.venv\\Scripts\\python.exe' : '.v
 module.exports = defineConfig({
   testDir: './tests',
   timeout: 30_000,
+  // Um teste por vez. A base em memória e o cache de motoristas do Streamlit
+  // (st.cache_data) são compartilhados entre sessões: em paralelo, um teste que
+  // cadastra um motorista muda a lista do outro e o Streamlit reinicia a caixa
+  // "Motorista" no meio do teste. Em série a suíte toda leva ~10 s.
+  workers: 1,
+  fullyParallel: false,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: { baseURL: `http://127.0.0.1:${PORTA_TELA}`, trace: 'retain-on-failure' },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],

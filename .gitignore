@@ -24,3 +24,4 @@ firestore-data/
 # Testes de aceitação (Playwright)
 node_modules/
 test-results/
+playwright-report/
